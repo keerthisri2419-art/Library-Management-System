@@ -1,0 +1,6 @@
+{% extends "base.html" %}{% block title %}My Books{% endblock %}{% block content %}
+<span class="eyebrow">YOUR READING ACTIVITY</span><h1>Hello, {{ session.get('name') }}</h1><p class="muted">View your current loans and borrowing history.</p>
+<div class="panel"><div class="section-head"><h2>My borrowed books</h2><a href="{{ url_for('books') }}">Browse books →</a></div>
+{% if loans %}<div class="table-scroll"><table><tr><th>Book</th><th>Issue date</th><th>Due date</th><th>Return date</th><th>Status</th><th>Fine</th></tr>
+{% for loan in loans %}<tr><td>{{ loan.title }}<small>{{ loan.author }}</small></td><td>{{ loan.issue_date }}</td><td>{{ loan.due_date }}</td><td>{{ loan.return_date or '—' }}</td><td><span class="status {{ loan.status|lower }}">{{ loan.status }}</span></td><td>₹{{ '%.2f'|format(loan.fine) }}</td></tr>{% endfor %}</table></div>
+{% else %}<p class="muted">You have not borrowed any books yet.</p>{% endif %}</div>{% endblock %}

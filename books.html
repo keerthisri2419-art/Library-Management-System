@@ -1,0 +1,6 @@
+{% extends "base.html" %}{% block title %}Books{% endblock %}{% block content %}
+<div class="section-head"><div><span class="eyebrow">THE COLLECTION</span><h1>Explore the books</h1><p class="muted">Search by title, author or category.</p></div></div>
+<form class="searchbar" method="get"><input name="q" value="{{ q }}" placeholder="Search books, authors, categories..."><button class="btn">Search</button></form>
+<div class="book-grid">{% for book in books %}<article class="book-card"><div class="book-cover"><span>{{ book.category }}</span><strong>{{ book.title }}</strong><small>{{ book.author }}</small></div><div class="book-info"><h3>{{ book.title }}</h3><p>{{ book.author }}</p><span class="availability">{{ book.available }} of {{ book.quantity }} available</span>
+{% if session.get('user_id') and session.get('role')=='student' and book.available>0 %}<form method="post" action="{{ url_for('issue_book',book_id=book.id) }}"><button class="btn small full">Borrow book</button></form>{% elif book.available==0 %}<span class="unavailable">Currently unavailable</span>{% elif not session.get('user_id') %}<a href="{{ url_for('login') }}">Log in to borrow</a>{% endif %}</div></article>
+{% else %}<p class="muted">No books matched your search.</p>{% endfor %}</div>{% endblock %}

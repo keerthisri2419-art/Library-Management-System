@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block title %}Home{% endblock %}{% block content %}
+<section class="hero"><div><span class="eyebrow">YOUR NEXT CHAPTER STARTS HERE</span>
+<h1>Find your next<br><em>great read.</em></h1><p>Explore the library collection, borrow books, and keep track of your reading journey in one simple place.</p>
+<div class="actions"><a class="btn" href="{{ url_for('books') }}">Explore books</a><a class="btn secondary" href="{{ url_for('register') }}">Create account</a></div></div>
+<div class="hero-art"><div class="book-stack"><span>READ</span><b>LEARN</b><i>GROW</i></div><div class="spark">✦</div></div></section>
+<section class="stats"><div class="stat"><strong>{{ stats.books }}</strong><span>Books in collection</span></div><div class="stat"><strong>{{ stats.available }}</strong><span>Available copies</span></div><div class="stat"><strong>{{ stats.students }}</strong><span>Registered students</span></div><div class="stat"><strong>{{ stats.issued }}</strong><span>Currently borrowed</span></div></section>
+<div class="section-head"><div><span class="eyebrow">HANDPICKED COLLECTION</span><h2>Recently added books</h2></div><a href="{{ url_for('books') }}">View all books →</a></div>
+<div class="book-grid">{% for book in books %}<article class="book-card"><div class="book-cover"><span>{{ book.category }}</span><strong>{{ book.title }}</strong><small>{{ book.author }}</small></div><div class="book-info"><h3>{{ book.title }}</h3><p>{{ book.author }}</p><span class="availability">{{ book.available }} available</span></div></article>{% endfor %}</div>
+{% endblock %}

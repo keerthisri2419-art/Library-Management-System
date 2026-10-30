@@ -1,0 +1,4 @@
+{% extends "base.html" %}{% block title %}Register{% endblock %}{% block content %}
+<div class="form-wrap"><span class="eyebrow">BECOME A MEMBER</span><h1>Create an account</h1>
+<form method="post"><label>Full name</label><input name="name" required><label>Email address</label><input type="email" name="email" required><label>Password (minimum 6 characters)</label><input type="password" name="password" minlength="6" required><button class="btn full">Create account</button></form>
+<p class="center muted">Already a member? <a href="{{ url_for('login') }}">Log in</a></p></div>{% endblock %}
